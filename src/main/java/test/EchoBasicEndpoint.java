@@ -57,9 +57,4 @@ public class EchoBasicEndpoint {
         }
     }
 
-    @OnError
-    public void onError(Throwable t) {
-        System.err.println("onError event occured: " + t.getMessage());
-        t.printStackTrace();
-    }
 }

@@ -56,10 +56,4 @@ public class EchoAsyncEndpoint {
             bytes = null;
         }
     }
-
-    @OnError
-    public void onError(Throwable t) {
-        System.err.println("onError event occured: " + t.getMessage());
-        t.printStackTrace();
-    }
 }
