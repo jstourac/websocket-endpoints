@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package websocket.echo;
+package test;
 
 import javax.websocket.OnMessage;
 import javax.websocket.PongMessage;
@@ -34,8 +34,10 @@ import java.util.concurrent.TimeoutException;
  * Autobahn documentation for setup and general information.
  *
  */
-@ServerEndpoint("/echoAsyncSingleMessageEndpoint")
+@ServerEndpoint(EchoAsyncWithFutureEndpoint.URL_PATTERN)
 public class EchoAsyncWithFutureEndpoint {
+
+    public static final String URL_PATTERN = "/echoAsyncSingleMessageEndpoint";
 
     private static final Future<Void> COMPLETED = new CompletedFuture();
 

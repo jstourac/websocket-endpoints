@@ -18,7 +18,6 @@
 
 package test;
 
-import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
@@ -26,8 +25,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-@ServerEndpoint("/echoAsyncEndpoint")
+@ServerEndpoint(EchoAsyncEndpoint.URL_PATTERN)
 public class EchoAsyncEndpoint {
+
+    public static final String URL_PATTERN = "/echoAsyncEndpoint";
 
     StringBuilder sb = null;
     ByteArrayOutputStream bytes = null;

@@ -26,14 +26,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
-@ServerEndpoint("/echoBasicEndpoint")
+@ServerEndpoint(EchoBasicEndpoint.URL_PATTERN)
 public class EchoBasicEndpoint {
+    public static final String URL_PATTERN = "/echoBasicEndpoint";
 
     Writer writer;
     OutputStream stream;
 
     @OnMessage
-    public void handleMessage(final String message, Session session, boolean last) throws IOException {
+    public void handleStringMessage(final String message, Session session, boolean last) throws IOException {
         if (writer == null) {
             writer = session.getBasicRemote().getSendWriter();
         }
@@ -45,7 +46,7 @@ public class EchoBasicEndpoint {
     }
 
     @OnMessage
-    public void handleMessage(final byte[] message, Session session, boolean last) throws IOException {
+    public void handleByteMessage(final byte[] message, Session session, boolean last) throws IOException {
         if (stream == null) {
             stream = session.getBasicRemote().getSendStream();
         }
@@ -55,6 +56,12 @@ public class EchoBasicEndpoint {
             stream.close();
             stream = null;
         }
+    }
+
+    @OnError
+    public void onError(Throwable t) {
+        System.err.println("WebSockets error message detected: " + t.getMessage());
+        t.printStackTrace();
     }
 
 }
