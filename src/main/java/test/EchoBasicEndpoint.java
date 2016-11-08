@@ -18,17 +18,22 @@
 
 package test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Writer;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Writer;
 
 @ServerEndpoint(EchoBasicEndpoint.URL_PATTERN)
 public class EchoBasicEndpoint {
     public static final String URL_PATTERN = "/echoBasicEndpoint";
+
+    private static final Logger log = LoggerFactory.getLogger(EchoBasicEndpoint.class);
 
     Writer writer;
     OutputStream stream;
@@ -60,8 +65,7 @@ public class EchoBasicEndpoint {
 
     @OnError
     public void onError(Throwable t) {
-        System.err.println("WebSockets error message detected: " + t.getMessage());
-        t.printStackTrace();
+        log.warn("WebSockets error message detected", t);
     }
 
 }
