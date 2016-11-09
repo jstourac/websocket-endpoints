@@ -1,14 +1,14 @@
 package websocket;
 
-import javax.websocket.Endpoint;
-import javax.websocket.EndpointConfig;
-import javax.websocket.MessageHandler;
-import javax.websocket.Session;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
+import javax.websocket.Endpoint;
+import javax.websocket.EndpointConfig;
+import javax.websocket.MessageHandler;
+import javax.websocket.Session;
 
 public class ProgramaticClientEndpoint extends Endpoint {
 
@@ -30,7 +30,7 @@ public class ProgramaticClientEndpoint extends Endpoint {
             @Override
             public void onMessage(ByteBuffer buffer) {
                 byte[] bytes;
-                if(buffer.hasArray()) {
+                if(buffer.hasArray() && (buffer.remaining() == buffer.array().length)) {
                     bytes = buffer.array();
                 } else {
                     bytes = new byte[buffer.remaining()];
